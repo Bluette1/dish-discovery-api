@@ -4,14 +4,16 @@ import { Request } from 'express';
 declare global {
   namespace Express {
     interface Request {
-      user?: string | UserPayload; // Add your custom `user` property here
+      user?: UserPayload; 
     }
   }
 
   interface UserPayload {
     id: string;
     role: string;
-    // Add other properties as needed
+    name: string;
+    email: string;
+    password: string;
 }
 }
 

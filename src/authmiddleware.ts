@@ -30,6 +30,7 @@ function authenticateToken(req: Request, res: Response, next: NextFunction) {
         return res.sendStatus(403);
       } // Forbidden
 
+
       // TypeScript now knows `req.user` exists because of the type declaration
       if (decodedToken && typeof decodedToken !== "string") {
         const { id, role } = decodedToken.payload as UserPayload;

@@ -1,6 +1,15 @@
-import mongoose from "mongoose";
+import mongoose, { Document, Schema } from "mongoose";
 
-const MealSchema = new mongoose.Schema({
+interface IMeal extends Document {
+  name: string;
+  description: string;
+  recipe: string;
+  category: string;
+  ingredients: string[];
+  region: string;
+}
+
+const MealSchema: Schema = new Schema({
   name: {
     type: String,
     required: true,
@@ -26,5 +35,7 @@ const MealSchema = new mongoose.Schema({
   },
 });
 
-const Meal = mongoose.model("Item", MealSchema);
-export { Meal };
+// Create the model
+const Meal = mongoose.model<IMeal>("Meal", MealSchema);
+
+export default Meal;
