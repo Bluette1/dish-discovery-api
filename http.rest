@@ -1,1 +1,27 @@
-GET 
+GET http://localhost:5000/
+
+###
+GET http://localhost:5000/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6InVzZXIiLCJpYXQiOjE3MjYwNjYxODYsIm5iZiI6MTcyNjA2NjE4NiwiZXhwIjoxNzI2MDY5Nzg2fQ.4hs1GegM_VDAdpGloU2aVQPQRiQ6AQmhPtAo5Khm4lc
+###
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "username": "user",
+    "password": "password"
+}
+###
+
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "adminpass"
+}
+
+###
+
+GET http://localhost:5000/admin
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzI2MDcwMDY0LCJuYmYiOjE3MjYwNzAwNjQsImV4cCI6MTcyNjA3MzY2NH0.6ls3uhP8PDwXNI6a3aOcAByOuBjpC5ajKt7WwO-TbNc

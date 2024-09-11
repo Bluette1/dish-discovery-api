@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import { logger } from "./logger";
@@ -10,7 +10,8 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/dishdiscovery'
+const MONGO_URI =
+  process.env.MONGO_URI || "mongodb://localhost:27017/dishdiscovery";
 
 app.use(express.json());
 
@@ -38,7 +39,7 @@ const users = [
   },
 ];
 
-const secretKey = "your_secret_key";
+const secretKey = process.env.JWT_SECRET_KEY || "YourSecretKey";
 
 // Login route
 app.post("/login", (req: Request, res: Response) => {
@@ -48,7 +49,10 @@ app.post("/login", (req: Request, res: Response) => {
     return res.status(401).send("Invalid credentials");
   }
 
-  const token = jwt.sign({ id: user.id, role: user.role }, secretKey);
+  const token = jwt.sign({ id: user.id, role: user.role }, secretKey, {
+    expiresIn: "1h",
+    notBefore: "0",
+  });
   res.json({ token });
 });
 
@@ -58,9 +62,14 @@ app.get("/user", authenticateToken, (req: Request, res: Response) => {
 });
 
 // Protected route for admin users
-app.get("/admin", authenticateToken, authorizeAdmin, (req: Request, res: Response) => {
-  res.send("Welcome, admin!");
-});
+app.get(
+  "/admin",
+  authenticateToken,
+  authorizeAdmin,
+  (req: Request, res: Response) => {
+    res.send("Welcome, admin!");
+  }
+);
 
 app.get("/", (req: Request, res: Response) => {
   logger.info("Hello world requested");

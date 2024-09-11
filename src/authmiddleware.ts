@@ -1,9 +1,10 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
-import bcrypt from "bcryptjs";
 import { Request, Response, NextFunction } from "express";
+import dotenv from "dotenv";
+dotenv.config();
 
 // Secret key for JWT
-const secretKey = process.env.JWT_SECRET_KEY ||  "YourSecretKey";
+const secretKey = process.env.JWT_SECRET_KEY || "YourSecretKey";
 
 // Middleware to authenticate users
 function authenticateToken(req: Request, res: Response, next: NextFunction) {
@@ -15,15 +16,24 @@ function authenticateToken(req: Request, res: Response, next: NextFunction) {
   jwt.verify(
     token,
     secretKey,
+    {
+      complete: true,
+      clockTolerance: 0,
+      ignoreExpiration: false,
+      ignoreNotBefore: false,
+    },
     (
       err: jwt.VerifyErrors | null,
       decodedToken: JwtPayload | string | undefined
     ) => {
-      if (err) return res.sendStatus(403); // Forbidden
+      if (err) {
+        return res.sendStatus(403);
+      } // Forbidden
 
       // TypeScript now knows `req.user` exists because of the type declaration
       if (decodedToken && typeof decodedToken !== "string") {
-        req.user = decodedToken; // Safely assign the decoded token to `req.user`
+        const { id, role } = decodedToken.payload as UserPayload;
+        req.user = { id, role }; // Safely assign the decoded token to `req.user`
       } else {
         return res.sendStatus(403); // Forbidden if token is invalid
       }
@@ -33,7 +43,6 @@ function authenticateToken(req: Request, res: Response, next: NextFunction) {
   );
 }
 
-
 // Middleware to check for admin role
 function authorizeAdmin(req: Request, res: Response, next: NextFunction) {
   // First, check if `req.user` exists
@@ -42,7 +51,7 @@ function authorizeAdmin(req: Request, res: Response, next: NextFunction) {
   }
 
   // Narrow down the type: check if `req.user` is a JwtPayload and contains `role`
-  if (typeof req.user !== 'string' && 'role' in req.user) {
+  if (typeof req.user !== "string" && "role" in req.user) {
     if (req.user.role !== "admin") {
       return res.status(403).send("Access Denied");
     }
