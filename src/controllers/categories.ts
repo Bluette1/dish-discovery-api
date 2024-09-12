@@ -1,5 +1,5 @@
-import { Request, Response } from "express";
-import Category  from "../models/category";
+import { Request, Response } from 'express';
+import Category from '../models/category';
 
 class CategoriesController {
   // Get all categories
@@ -8,7 +8,7 @@ class CategoriesController {
       const categories = await Category.find(); // Replace with actual data fetching logic
       res.status(200).json(categories);
     } catch (error) {
-      res.status(500).json({ message: "Server error" });
+      res.status(500).json({ message: 'Server error' });
     }
   }
 
@@ -20,10 +20,10 @@ class CategoriesController {
       if (category) {
         res.status(200).json(category);
       } else {
-        res.status(404).json({ message: "Category not found" });
+        res.status(404).json({ message: 'Category not found' });
       }
     } catch (error) {
-      res.status(500).json({ message: "Server error" });
+      res.status(500).json({ message: 'Server error' });
     }
   }
 
@@ -34,7 +34,7 @@ class CategoriesController {
       const savedCategory = await newCategory.save();
       res.status(201).json(savedCategory);
     } catch (error) {
-      res.status(500).json({ message: "Server error" });
+      res.status(500).json({ message: 'Server error' });
     }
   }
 
@@ -46,10 +46,10 @@ class CategoriesController {
       if (updatedCategory) {
         res.status(200).json(updatedCategory);
       } else {
-        res.status(404).json({ message: "Category not found" });
+        res.status(404).json({ message: 'Category not found' });
       }
     } catch (error) {
-      res.status(500).json({ message: "Server error" });
+      res.status(500).json({ message: 'Server error' });
     }
   }
 
@@ -61,10 +61,10 @@ class CategoriesController {
       if (deletedCategory) {
         res.status(204).send();
       } else {
-        res.status(404).json({ message: "Category not found" });
+        res.status(404).json({ message: 'Category not found' });
       }
     } catch (error) {
-      res.status(500).json({ message: "Server error" });
+      res.status(500).json({ message: 'Server error' });
     }
   }
 }

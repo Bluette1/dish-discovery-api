@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import CategoriesController from '../controllers/categories';
-import { authenticateToken, authorizeAdmin  } from '../authmiddleware';
+import { authenticateToken, authorizeAdmin } from '../authmiddleware';
 
 const router = Router();
 
@@ -12,7 +12,7 @@ router.use(authenticateToken); // Apply authentication middleware
 
 router.get('/categories/:id', CategoriesController.getCategoryById);
 
-//Admin only
+// Admin only
 router.post('/categories', authorizeAdmin, CategoriesController.createCategory);
 
 router.put('/categories/:id', authorizeAdmin, CategoriesController.updateCategory);

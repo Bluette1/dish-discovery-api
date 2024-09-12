@@ -4,7 +4,7 @@ import { Request } from 'express';
 declare global {
   namespace Express {
     interface Request {
-      user?: UserPayload; 
+      user?: UserPayload;
     }
   }
 
@@ -16,6 +16,5 @@ declare global {
     password: string;
 }
 }
-
 
 export {}; // This line ensures the file is treated as a module

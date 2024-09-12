@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { Document, Schema } from 'mongoose';
 
 interface IMeal extends Document {
   name: string;
@@ -36,6 +36,6 @@ const MealSchema: Schema = new Schema({
 });
 
 // Create the model
-const Meal = mongoose.model<IMeal>("Meal", MealSchema);
+const Meal = mongoose.model<IMeal>('Meal', MealSchema);
 
 export default Meal;
