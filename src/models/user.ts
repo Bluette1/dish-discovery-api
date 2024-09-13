@@ -1,8 +1,8 @@
-import mongoose, { Document, Schema, CallbackError } from 'mongoose';
+import mongoose, { Document, Schema } from 'mongoose';
 import bcrypt from 'bcryptjs';
 import validator from 'validator';
 
-interface IUser extends Document {
+export interface IUser extends Document {
   name: string;
   email: string;
   password: string;

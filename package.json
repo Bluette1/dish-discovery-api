@@ -8,7 +8,9 @@
     "start": "node dist/index.js",
     "dev": "ts-node --files src/index.ts",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
-    "lint:fix": "eslint 'src/**/*.{ts,tsx}' --fix"
+    "lint:fix": "eslint 'src/**/*.{ts,tsx}' --fix",
+    "seed:dev": "ts-node src/seed.ts",
+    "seed": "node dist/seed.js"
   },
   "keywords": [],
   "author": "",
@@ -29,6 +31,7 @@
     "@types/jsonwebtoken": "^9.0.6",
     "@types/mongoose": "^5.11.97",
     "@types/node": "^22.5.4",
+    "@types/validator": "^13.12.1",
     "@typescript-eslint/eslint-plugin": "^8.5.0",
     "@typescript-eslint/parser": "^8.5.0",
     "eslint": "8.x",

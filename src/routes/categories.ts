@@ -8,15 +8,13 @@ const router = Router();
 router.get('/categories', CategoriesController.getAllCategories);
 
 // Protected routes
-router.use(authenticateToken); // Apply authentication middleware
-
-router.get('/categories/:id', CategoriesController.getCategoryById);
+router.get('/categories/:id', authenticateToken, CategoriesController.getCategoryById);
 
 // Admin only
-router.post('/categories', authorizeAdmin, CategoriesController.createCategory);
+router.post('/categories',authenticateToken, authorizeAdmin, CategoriesController.createCategory);
 
-router.put('/categories/:id', authorizeAdmin, CategoriesController.updateCategory);
+router.put('/categories/:id', authenticateToken, authorizeAdmin, CategoriesController.updateCategory);
 
-router.delete('/categories/:id', authorizeAdmin, CategoriesController.deleteCategory);
+router.delete('/categories/:id',authenticateToken, authorizeAdmin, CategoriesController.deleteCategory);
 
 export default router;

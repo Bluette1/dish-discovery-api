@@ -28,7 +28,9 @@ class LoginController {
       }
 
       // Generate JWT token
-      const token = jwt.sign({ id: user._id, role: user.role }, secretKey, {
+      const token = jwt.sign({
+        id: user._id, role: user.role, name: user.name, email: user.email,
+      }, secretKey, {
         expiresIn: '1h',
         notBefore: '0',
       });
