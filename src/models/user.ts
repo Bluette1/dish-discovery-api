@@ -1,8 +1,10 @@
 import mongoose, { Document, Schema } from 'mongoose';
 import bcrypt from 'bcryptjs';
 import validator from 'validator';
+import normalizeEmail from 'normalize-email';
 
 export interface IUser extends Document {
+  _id: mongoose.Types.ObjectId;
   name: string;
   email: string;
   password: string;
@@ -39,6 +41,7 @@ const UserSchema: Schema = new Schema({
 
 // Hash password before saving
 UserSchema.pre<IUser>('save', async function (next) {
+  this.email = normalizeEmail(this.email);
   if (!this.isModified('password')) return next();
 
   try {
