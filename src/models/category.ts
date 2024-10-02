@@ -11,6 +11,9 @@ const CategorySchema: Schema = new Schema({
     required: true,
     unique: true,
   },
+  description: {
+    type: String,
+  },
 });
 
 const Category = mongoose.model<ICategory>('Category', CategorySchema);

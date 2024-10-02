@@ -28,7 +28,6 @@ const UserSchema: Schema = new Schema({
   },
   password: {
     type: String,
-    required: true,
     minlength: 6,
   },
   role: {
@@ -42,7 +41,7 @@ const UserSchema: Schema = new Schema({
 // Hash password before saving
 UserSchema.pre<IUser>('save', async function (next) {
   this.email = normalizeEmail(this.email);
-  if (!this.isModified('password')) return next();
+  if (!this.password || !this.isModified('password')) return next();
 
   try {
     const salt = await bcrypt.genSalt(10);

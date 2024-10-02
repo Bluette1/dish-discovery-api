@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { normalizeEmail } from "validator";
 import User from "../models/user";
 import { IUser } from "../models/user";
 
@@ -30,8 +31,9 @@ class UsersController {
 
   // Create a new user
   public async createUser(req: Request, res: Response): Promise<void> {
+    const { name, email, password, role } = req.body;
+
     try {
-      const { name, email, password, role } = req.body;
       const newUser = new User({
         name,
         email,
@@ -49,16 +51,24 @@ class UsersController {
       }
 
       const savedUser = await newUser.save();
-      res
-        .status(201)
-        .json({
-          id: savedUser._id,
-          name: savedUser.name,
-          role: savedUser.role,
-          email: savedUser.email,
-        });
+      res.status(201).json({
+        id: savedUser._id,
+        name: savedUser.name,
+        role: savedUser.role,
+        email: savedUser.email,
+      });
     } catch (error) {
-      res.status(500).json({ message: "Server error" });
+      if (JSON.stringify(error).includes("duplicate key")) {
+        const existingUser = await User.findOne({ email: normalizeEmail(email) });
+        res.status(200).json({
+          id: existingUser?._id,
+          name: existingUser?.name,
+          role: existingUser?.role,
+          email: existingUser?.email,
+        });
+      } else {
+        res.status(500).json({ message: "Server error", error });
+      }
     }
   }
 

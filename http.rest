@@ -73,6 +73,16 @@ Content-Type: application/json
     "role": "admin"
 }
 
+###
+
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+    "name": "test call",
+    "email": "test@gmail.com"
+}
+
 
 ###
 POST http://localhost:5000/users
