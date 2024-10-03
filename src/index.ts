@@ -2,6 +2,7 @@ import express, { NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import categories from "./routes/categories";
+import meals from "./routes/meals";
 import auth from "./routes/auth";
 import users from "./routes/users";
 import { logger } from "./logger";
@@ -36,6 +37,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use("/", categories);
+app.use("/", meals);
 app.use("/", auth);
 app.use("/", users);
 
