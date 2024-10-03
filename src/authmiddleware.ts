@@ -22,7 +22,7 @@ async function authenticateToken(
 
   if (!token) return res.sendStatus(401); // Unauthorized
 
-  if (token.length > 100) {
+  if (token.length > 300) {
     // Google ID tokens are generally longer
     try {
       const ticket = await client.verifyIdToken({
@@ -50,7 +50,7 @@ async function authenticateToken(
           email,
           name,
         };
-        return next(); 
+        return next();
       }
     } catch (error) {
       console.error("Error verifying Google token:", error);
@@ -73,7 +73,7 @@ async function authenticateToken(
         decodedToken: JwtPayload | string | undefined
       ) => {
         if (err) {
-          return res.sendStatus(403); 
+          return res.sendStatus(403);
         }
 
         // If the token is decoded and not a string, assign its payload to req.user
@@ -100,17 +100,17 @@ async function authenticateToken(
 function authorizeAdmin(req: Request, res: Response, next: NextFunction) {
   // First, check if `req.user` exists
   if (!req.user) {
-    return res.status(403).send("Access Denied");
+    return res.status(403).send({ message: "Access Denied" });
   }
 
   // Narrow down the type: check if `req.user` is a JwtPayload and contains `role`
   if (typeof req.user !== "string" && "role" in req.user) {
     if (req.user.role !== "admin") {
-      return res.status(403).send("Access Denied");
+      return res.status(403).send({ message: "Access Denied" });
     }
   } else {
     // If `req.user` is a string or doesn't have a `role`, deny access
-    return res.status(403).send("Access Denied");
+    return res.status(403).send({ message: "Access Denied" });
   }
 
   return next();
