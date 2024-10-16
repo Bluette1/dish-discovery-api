@@ -1,0 +1,115 @@
+GET http://localhost:5000/
+
+###
+GET http://localhost:5000/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6InVzZXIiLCJpYXQiOjE3MjYwNjYxODYsIm5iZiI6MTcyNjA2NjE4NiwiZXhwIjoxNzI2MDY5Nzg2fQ.4hs1GegM_VDAdpGloU2aVQPQRiQ6AQmhPtAo5Khm4lc
+###
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "username": "user",
+    "password": "password"
+}
+###
+
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "email": "admin@gmail.com",
+    "password": "adminpass"
+}
+
+###
+
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "email": "newadmin@gmail.com",
+    "password": "newadminpass"
+}
+
+###
+PUT http://localhost:5000/users/66e33aff18cb5c59927fc03a
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZTM3MWM4YWRmM2RiMTc3ZTQ4Yzg0ZiIsInJvbGUiOiJhZG1pbiIsIm5hbWUiOiJuZXcgYWRtaW4iLCJlbWFpbCI6Im5ld2FkbWluQGdtYWlsLmNvbSIsImlhdCI6MTcyNjE4MjA0NywibmJmIjoxNzI2MTgyMDQ3LCJleHAiOjE3MjYxODU2NDd9.KbIzndiCxzkTdvQ1MRDlPQVCR23_fwNgMrIF4Ss7M0o
+
+{
+    "role": "admin",
+    "name": "admin"
+}
+
+###
+
+GET http://localhost:5000/admin
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzI2MDcwMDY0LCJuYmYiOjE3MjYwNzAwNjQsImV4cCI6MTcyNjA3MzY2NH0.6ls3uhP8PDwXNI6a3aOcAByOuBjpC5ajKt7WwO-TbNc
+
+###
+GET http://localhost:5000/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZTM3MWM4YWRmM2RiMTc3ZTQ4Yzg0ZiIsInJvbGUiOiJhZG1pbiIsIm5hbWUiOiJuZXcgYWRtaW4iLCJlbWFpbCI6Im5ld2FkbWluQGdtYWlsLmNvbSIsImlhdCI6MTcyNjE4MjA0NywibmJmIjoxNzI2MTgyMDQ3LCJleHAiOjE3MjYxODU2NDd9.KbIzndiCxzkTdvQ1MRDlPQVCR23_fwNgMrIF4Ss7M0o
+
+
+###
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+    "name": "admin",
+    "email": "admin@gmail.com",
+    "password": "adminpass"
+}
+
+###
+
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+    "name": "other admin",
+    "email": "otheradmin@gmail.com",
+    "password": "otheradminpass",
+    "role": "admin"
+}
+
+###
+
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+    "name": "test call",
+    "email": "test@gmail.com"
+}
+
+
+###
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+    "name": "user",
+    "email": "user@gmail.com",
+    "password": "password"
+}
+
+###
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+    "name": "Anne Smith",
+    "email": "annesmith@gmail.com",
+    "password": "password1"
+}
+
+###
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+    "name": "John Smith",
+    "email": "johnsmith@gmail.com",
+    "password": "password2"
+}
