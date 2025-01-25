@@ -10,7 +10,7 @@ interface IMeal extends Document {
   imageUrl: string;
   price: number;
   serves: number;
-  
+
 }
 
 const MealSchema: Schema = new Schema({
@@ -47,7 +47,7 @@ const MealSchema: Schema = new Schema({
   },
   serves: {
     type: Number,
-    default: 1
+    default: 1,
   },
 });
 

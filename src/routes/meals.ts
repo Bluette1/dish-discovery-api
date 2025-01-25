@@ -1,35 +1,35 @@
-import { Router } from "express";
-import MealsController from "../controllers/meals";
-import { authenticateToken, authorizeAdmin } from "../authmiddleware";
+import { Router } from 'express';
+import MealsController from '../controllers/meals';
+import { authenticateToken, authorizeAdmin } from '../authmiddleware';
 
 const router = Router();
 
 // Public route to get all meals
-router.get("/meals", MealsController.getAllMeals);
+router.get('/meals', MealsController.getAllMeals);
 
 // Protected routes
-router.get("/meals/:id", authenticateToken, MealsController.getMealById);
+router.get('/meals/:id', authenticateToken, MealsController.getMealById);
 
 // Admin only
 router.post(
-  "/meals",
+  '/meals',
   authenticateToken,
   authorizeAdmin,
-  MealsController.createMeal
+  MealsController.createMeal,
 );
 
 router.put(
-  "/meals/:id",
+  '/meals/:id',
   authenticateToken,
   authorizeAdmin,
-  MealsController.updateMeal
+  MealsController.updateMeal,
 );
 
 router.delete(
-  "/meals/:id",
+  '/meals/:id',
   authenticateToken,
   authorizeAdmin,
-  MealsController.deleteMeal
+  MealsController.deleteMeal,
 );
 
 export default router;

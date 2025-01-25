@@ -1,5 +1,5 @@
-import { Request, Response } from "express";
-import Meal from "../models/meal";
+import { Request, Response } from 'express';
+import Meal from '../models/meal';
 
 function capitalizeWordsRegex(string: string) {
   return string.replace(/\b\w/g, (char: string) => char.toUpperCase());
@@ -14,9 +14,9 @@ class MealsController {
       let meals;
       // If a category is provided, filter meals by that category
 
-      if (category && typeof category == "string") {
+      if (category && typeof category === 'string') {
         meals = await Meal.find({ category: decodeURIComponent(category) });
-      } else if (name && typeof name == "string") {
+      } else if (name && typeof name === 'string') {
         // If a name is provided, filter meals by that category
         meals = await Meal.find({ name: decodeURIComponent(name) });
       }
@@ -26,7 +26,7 @@ class MealsController {
       }
       res.status(200).json(meals);
     } catch (error) {
-      res.status(500).json({ message: "Server error" });
+      res.status(500).json({ message: 'Server error' });
     }
   }
 
@@ -38,10 +38,10 @@ class MealsController {
       if (meal) {
         res.status(200).json(meal);
       } else {
-        res.status(404).json({ message: "Meal not found" });
+        res.status(404).json({ message: 'Meal not found' });
       }
     } catch (error) {
-      res.status(500).json({ message: "Server error" });
+      res.status(500).json({ message: 'Server error' });
     }
   }
 
@@ -52,7 +52,7 @@ class MealsController {
       const savedMeal = await newMeal.save();
       res.status(201).json(savedMeal);
     } catch (error) {
-      res.status(500).json({ message: "Server error" });
+      res.status(500).json({ message: 'Server error' });
     }
   }
 
@@ -66,10 +66,10 @@ class MealsController {
       if (updatedMeal) {
         res.status(200).json(updatedMeal);
       } else {
-        res.status(404).json({ message: "Meal not found" });
+        res.status(404).json({ message: 'Meal not found' });
       }
     } catch (error) {
-      res.status(500).json({ message: "Server error" });
+      res.status(500).json({ message: 'Server error' });
     }
   }
 
@@ -81,10 +81,10 @@ class MealsController {
       if (deletedMeal) {
         res.status(204).send();
       } else {
-        res.status(404).json({ message: "Meal not found" });
+        res.status(404).json({ message: 'Meal not found' });
       }
     } catch (error) {
-      res.status(500).json({ message: "Server error" });
+      res.status(500).json({ message: 'Server error' });
     }
   }
 }
