@@ -7,6 +7,10 @@ interface IMeal extends Document {
   category: string;
   ingredients: string[];
   region: string;
+  imageUrl: string;
+  price: number;
+  serves: number;
+  
 }
 
 const MealSchema: Schema = new Schema({
@@ -32,6 +36,18 @@ const MealSchema: Schema = new Schema({
   },
   region: {
     type: String,
+  },
+  imageUrl: {
+    type: String,
+    required: true,
+  },
+  price: {
+    type: Number,
+    required: true,
+  },
+  serves: {
+    type: Number,
+    default: 1
   },
 });
 
