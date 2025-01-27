@@ -2,10 +2,24 @@ import { Request, Response } from "express";
 import Meal from "../models/meal";
 
 class MealsController {
-  // Get all meals
+  // Get all meals or meals by category, name, etc
   public async getAllMeals(req: Request, res: Response): Promise<void> {
     try {
-      const meals = await Meal.find();
+      const { category, name } = req.query;
+
+      let meals;
+      // If a category is provided, filter meals by that category
+
+      if (category && typeof category === "string") {
+        meals = await Meal.find({ category: decodeURIComponent(category) });
+      } else if (name && typeof name === "string") {
+        // If a name is provided, filter meals by that name
+        meals = await Meal.find({ name: decodeURIComponent(name) });
+      }
+      // If no category or name is provided, return all meals
+      else {
+        meals = await Meal.find();
+      }
       res.status(200).json(meals);
     } catch (error) {
       res.status(500).json({ message: "Server error" });

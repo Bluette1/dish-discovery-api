@@ -11,10 +11,10 @@ router.get('/categories', CategoriesController.getAllCategories);
 router.get('/categories/:id', authenticateToken, CategoriesController.getCategoryById);
 
 // Admin only
-router.post('/categories',authenticateToken, authorizeAdmin, CategoriesController.createCategory);
+router.post('/categories', authenticateToken, authorizeAdmin, CategoriesController.createCategory);
 
 router.put('/categories/:id', authenticateToken, authorizeAdmin, CategoriesController.updateCategory);
 
-router.delete('/categories/:id',authenticateToken, authorizeAdmin, CategoriesController.deleteCategory);
+router.delete('/categories/:id', authenticateToken, authorizeAdmin, CategoriesController.deleteCategory);
 
 export default router;
