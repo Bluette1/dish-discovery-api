@@ -54,7 +54,7 @@ To get started with the Dish Discovery API, follow these instructions:
    npm start
    ```
 
-2. The API will be available at `http://localhost:YOUR_PORT` (default port might be 3000).
+2. The API will be available at `http://localhost:5000` .
 
 ## API Endpoints
 
