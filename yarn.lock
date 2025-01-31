@@ -1993,6 +1993,11 @@ node-fetch@^2.6.9:
   dependencies:
     whatwg-url "^5.0.0"
 
+nodemailer@^6.10.0:
+  version "6.10.0"
+  resolved "https://registry.npmjs.org/nodemailer/-/nodemailer-6.10.0.tgz#1f24c9de94ad79c6206f66d132776b6503003912"
+  integrity sha512-SQ3wZCExjeSatLE/HBaXS5vqUOQk6GtBdIIKxiFdmm01mOQZX/POJkO3SUX1wDiYcwUOJwT23scFSC9fY2H8IA==
+
 normalize-email@^1.1.1:
   version "1.1.1"
   resolved "https://registry.npmjs.org/normalize-email/-/normalize-email-1.1.1.tgz#7f7e495950b67be3ecc788ba72ef7df951e9f32e"

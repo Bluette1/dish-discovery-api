@@ -24,6 +24,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.5.2",
     "morgan": "^1.10.0",
+    "nodemailer": "^6.10.0",
     "normalize-email": "^1.1.1",
     "validator": "^13.12.0",
     "winston": "^3.14.2"
