@@ -2,6 +2,17 @@ import { Request, Response } from 'express';
 import { normalizeEmail } from 'validator';
 import User, { IUser } from '../models/user';
 
+const nodemailer = require('nodemailer');
+
+// Configure email transporter
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: `${process.env.USER}`,
+    pass: `${process.env.PASSWORD}`,
+  },
+});
+
 class UsersController {
   // Get all users
   public async getAllUsers(req: Request, res: Response): Promise<void> {
@@ -52,6 +63,21 @@ class UsersController {
       }
 
       const savedUser = await newUser.save();
+
+      // Send confirmation email
+      const mailOptions = {
+        from: `${process.env.USER}`,
+        to: savedUser.email,
+        subject: 'Welcome to Dish Discovery! Registration Successful',
+        html: `
+        <h1>Welcome!</h1>
+        <p>Thank you for registering with our service.</p>
+        <p>Your account has been successfully created.</p>
+      `,
+      };
+
+      await transporter.sendMail(mailOptions);
+
       res.status(201).json({
         id: savedUser._id,
         name: savedUser.name,
@@ -60,7 +86,9 @@ class UsersController {
       });
     } catch (error) {
       if (JSON.stringify(error).includes('duplicate key')) {
-        const existingUser = await User.findOne({ email: normalizeEmail(email) });
+        const existingUser = await User.findOne({
+          email: normalizeEmail(email),
+        });
         res.status(200).json({
           id: existingUser?._id,
           name: existingUser?.name,
