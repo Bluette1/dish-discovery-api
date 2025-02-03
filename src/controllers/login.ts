@@ -2,6 +2,8 @@ import { Request, Response } from 'express';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import User from '../models/user';
+import normalizeEmail from 'normalize-email';
+
 
 dotenv.config();
 
@@ -14,7 +16,7 @@ class LoginController {
       const { email, password } = req.body;
 
       // Find user by email
-      const user = await User.findOne({ email });
+      const user = await User.findOne({ email: normalizeEmail(email) });
       if (!user) {
         res.status(401).json({ message: 'Invalid email or password' });
         return;
