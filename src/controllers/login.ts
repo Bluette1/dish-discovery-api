@@ -1,14 +1,14 @@
-import { Request, Response } from "express";
-import dotenv from "dotenv";
-import jwt from "jsonwebtoken";
-import User from "../models/user";
-import normalizeEmail from "normalize-email";
-import { sendEmail } from "../utils/email";
-import crypto from "crypto";
+import { Request, Response } from 'express';
+import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
+import normalizeEmail from 'normalize-email';
+import crypto from 'crypto';
+import User from '../models/user';
+import { sendEmail } from '../utils/email';
 
 dotenv.config();
 
-const secretKey = process.env.JWT_SECRET_KEY || "YourSecretKey";
+const secretKey = process.env.JWT_SECRET_KEY || 'YourSecretKey';
 
 class LoginController {
   // User login
@@ -19,14 +19,14 @@ class LoginController {
       // Find user by email
       const user = await User.findOne({ email: normalizeEmail(email) });
       if (!user) {
-        res.status(401).json({ message: "Invalid email or password" });
+        res.status(401).json({ message: 'Invalid email or password' });
         return;
       }
 
       // Compare provided password with hashed password in the database
       const isMatch = await user.comparePassword(password);
       if (!isMatch) {
-        res.status(401).json({ message: "Invalid email or password" });
+        res.status(401).json({ message: 'Invalid email or password' });
         return;
       }
 
@@ -40,9 +40,9 @@ class LoginController {
         },
         secretKey,
         {
-          expiresIn: "1h",
-          notBefore: "0",
-        }
+          expiresIn: '1h',
+          notBefore: '0',
+        },
       );
 
       // Respond with token and user details
@@ -59,7 +59,7 @@ class LoginController {
       if (error instanceof Error) {
         res.status(500).json({ message: error.message });
       } else {
-        res.status(500).json({ message: "An unknown error occurred" });
+        res.status(500).json({ message: 'An unknown error occurred' });
       }
     }
   }
@@ -72,13 +72,13 @@ class LoginController {
       if (!user) {
         // Return 200 even if user doesn't exist for security
         res.json({
-          message: "If an account exists, a reset link will be sent",
+          message: 'If an account exists, a reset link will be sent',
         });
         return;
       }
 
       // Generate reset token
-      const resetToken = crypto.randomBytes(32).toString("hex");
+      const resetToken = crypto.randomBytes(32).toString('hex');
       const resetTokenExpiry = Date.now() + 3600000; // 1 hour
 
       // Save to user
@@ -90,7 +90,7 @@ class LoginController {
       const resetUrl = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
       await sendEmail({
         to: user.email,
-        subject: "Password Reset Request",
+        subject: 'Password Reset Request',
         text: `To reset your password, click the following link: ${resetUrl}`,
         html: `
           <p>To reset your password, click the following link:</p>
@@ -99,10 +99,10 @@ class LoginController {
         `,
       });
 
-      res.json({ message: "Reset link sent to email" });
+      res.json({ message: 'Reset link sent to email' });
     } catch (error) {
-      console.error("Password reset error:", error);
-      res.status(500).json({ message: "Error sending reset email" });
+      console.error('Password reset error:', error);
+      res.status(500).json({ message: 'Error sending reset email' });
     }
   }
 
@@ -116,7 +116,7 @@ class LoginController {
       });
 
       if (!user) {
-        res.status(400).json({ message: "Invalid or expired reset token" });
+        res.status(400).json({ message: 'Invalid or expired reset token' });
         return;
       }
 
@@ -126,10 +126,10 @@ class LoginController {
       user.resetTokenExpiry = undefined;
       await user.save();
 
-      res.json({ message: "Password reset successful" });
+      res.json({ message: 'Password reset successful' });
     } catch (error) {
-      console.error("Password reset error:", error);
-      res.status(500).json({ message: "Error resetting password" });
+      console.error('Password reset error:', error);
+      res.status(500).json({ message: 'Error resetting password' });
     }
   }
 }
