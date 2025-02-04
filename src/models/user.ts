@@ -9,6 +9,8 @@ export interface IUser extends Document {
   email: string;
   password: string;
   role: string;
+  resetToken?: string;
+  resetTokenExpiry?: number;
   comparePassword(password: string): Promise<boolean>;
 }
 
@@ -36,6 +38,8 @@ const UserSchema: Schema = new Schema({
     enum: ['admin', 'user'],
     default: 'user',
   },
+  resetToken: String,
+  resetTokenExpiry: Number,
 });
 
 // Hash password before saving
