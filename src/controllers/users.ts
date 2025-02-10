@@ -106,7 +106,7 @@ class UsersController {
     try {
       const { id } = req.params;
       const {
-        name, email, password, role,
+        name, email, password, role, cart
       } = req.body;
       const currentUserRole = req.user?.role;
 
@@ -122,6 +122,7 @@ class UsersController {
       if (email) updateFields.email = email;
       if (password) updateFields.password = password;
       if (role) updateFields.role = role;
+      if (cart) updateFields.cart = cart;
 
       const updatedUser = await User.findByIdAndUpdate(id, updateFields, {
         new: true,

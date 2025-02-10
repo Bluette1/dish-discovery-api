@@ -1,7 +1,12 @@
-import mongoose, { Document, Schema } from 'mongoose';
-import bcrypt from 'bcryptjs';
-import validator from 'validator';
-import normalizeEmail from 'normalize-email';
+import mongoose, { Document, Schema } from "mongoose";
+import bcrypt from "bcryptjs";
+import validator from "validator";
+import normalizeEmail from "normalize-email";
+
+export interface ICartItem {
+  _id: mongoose.Types.ObjectId;
+  quantity: number;
+}
 
 export interface IUser extends Document {
   _id: mongoose.Types.ObjectId;
@@ -11,6 +16,7 @@ export interface IUser extends Document {
   role: string;
   resetToken?: string;
   resetTokenExpiry?: number;
+  cart: ICartItem[];
   comparePassword(password: string): Promise<boolean>;
 }
 
@@ -25,7 +31,8 @@ const UserSchema: Schema = new Schema({
     unique: true,
     validate: {
       validator: (v: string) => validator.isEmail(v),
-      message: (props: { value: string }) => `${props.value} is not a valid email address`,
+      message: (props: { value: string }) =>
+        `${props.value} is not a valid email address`,
     },
   },
   password: {
@@ -35,17 +42,26 @@ const UserSchema: Schema = new Schema({
   role: {
     type: String,
     required: true,
-    enum: ['admin', 'user'],
-    default: 'user',
+    enum: ["admin", "user"],
+    default: "user",
   },
   resetToken: String,
   resetTokenExpiry: Number,
+  cart: {
+    type: [
+      {
+        _id: { type: mongoose.Types.ObjectId, required: true, ref: 'Meal' }, // Reference to Meal model
+        quantity: { type: Number, required: true, min: 1 },
+      },
+    ],
+    default: [],
+  },
 });
 
 // Hash password before saving
-UserSchema.pre<IUser>('save', async function (next) {
+UserSchema.pre<IUser>("save", async function (next) {
   this.email = normalizeEmail(this.email);
-  if (!this.password || !this.isModified('password')) return next();
+  if (!this.password || !this.isModified("password")) return next();
 
   try {
     const salt = await bcrypt.genSalt(10);
@@ -55,18 +71,18 @@ UserSchema.pre<IUser>('save', async function (next) {
     if (error instanceof Error) {
       next(error);
     } else {
-      next(new Error('An unknown error occurred'));
+      next(new Error("An unknown error occurred"));
     }
   }
 });
 
 // Method to compare passwords
 UserSchema.methods.comparePassword = async function (
-  password: string,
+  password: string
 ): Promise<boolean> {
   return bcrypt.compare(password, this.password);
 };
 
-const User = mongoose.model<IUser>('User', UserSchema);
+const User = mongoose.model<IUser>("User", UserSchema);
 
 export default User;
