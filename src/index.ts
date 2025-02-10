@@ -5,6 +5,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import categories from './routes/categories';
 import meals from './routes/meals';
+import orders from './routes/orders';
 import auth from './routes/auth';
 import users from './routes/users';
 import { logger } from './logger';
@@ -44,6 +45,7 @@ app.get('/', (req: Request, res: Response) => {
 
 app.use('/', categories);
 app.use('/', meals);
+app.use('/', orders);
 app.use('/', auth);
 app.use('/', users);
 

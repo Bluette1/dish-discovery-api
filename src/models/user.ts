@@ -50,7 +50,7 @@ const UserSchema: Schema = new Schema({
   cart: {
     type: [
       {
-        _id: { type: mongoose.Types.ObjectId, required: true, ref: 'Meal' }, // Reference to Meal model
+        _id: { type: mongoose.Types.ObjectId, required: true, ref: 'Meal' },
         quantity: { type: Number, required: true, min: 1 },
       },
     ],
