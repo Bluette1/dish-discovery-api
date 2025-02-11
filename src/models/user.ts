@@ -4,7 +4,7 @@ import validator from 'validator';
 import normalizeEmail from 'normalize-email';
 
 export interface ICartItem {
-  _id: mongoose.Types.ObjectId;
+  meal: Schema.Types.ObjectId;
   quantity: number;
 }
 
@@ -49,7 +49,7 @@ const UserSchema: Schema = new Schema({
   cart: {
     type: [
       {
-        _id: { type: mongoose.Types.ObjectId, required: true, ref: 'Meal' },
+        meal: { type:  Schema.Types.ObjectId, required: true, ref: 'Meal' },
         quantity: { type: Number, required: true, min: 1 },
       },
     ],

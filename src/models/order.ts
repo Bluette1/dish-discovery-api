@@ -1,7 +1,7 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
 export interface IOrderItem {
-  _id: mongoose.Types.ObjectId;
+  meal: Schema.Types.ObjectId;
   quantity: number;
 }
 
@@ -42,14 +42,14 @@ const OrderSchema: Schema = new Schema(
       default: OrderStatus.PENDING,
     },
     user: {
-      type: mongoose.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       required: true,
       ref: 'User',
     },
     items: {
       type: [
         {
-          _id: { type: mongoose.Types.ObjectId, required: true, ref: 'Meal' },
+          meal: { type:  Schema.Types.ObjectId, required: true, ref: 'Meal' },
           quantity: { type: Number, required: true, min: 1 },
         },
       ],

@@ -3,6 +3,7 @@ GET http://localhost:5000/
 ###
 GET http://localhost:5000/user
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6InVzZXIiLCJpYXQiOjE3MjYwNjYxODYsIm5iZiI6MTcyNjA2NjE4NiwiZXhwIjoxNzI2MDY5Nzg2fQ.4hs1GegM_VDAdpGloU2aVQPQRiQ6AQmhPtAo5Khm4lc
+
 ###
 POST http://localhost:5000/login
 Content-Type: application/json
@@ -27,9 +28,10 @@ POST http://localhost:5000/login
 Content-Type: application/json
 
 {
-    "email": "newadmin@gmail.com",
-    "password": "newadminpass"
+    "email": "marylene.ndana@gmial.com",
+    "password": "GodIsGood123&"
 }
+
 
 
 ###
@@ -72,6 +74,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6I
 GET http://localhost:5000/users
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZTM3MWM4YWRmM2RiMTc3ZTQ4Yzg0ZiIsInJvbGUiOiJhZG1pbiIsIm5hbWUiOiJuZXcgYWRtaW4iLCJlbWFpbCI6Im5ld2FkbWluQGdtYWlsLmNvbSIsImlhdCI6MTcyNjE4MjA0NywibmJmIjoxNzI2MTgyMDQ3LCJleHAiOjE3MjYxODU2NDd9.KbIzndiCxzkTdvQ1MRDlPQVCR23_fwNgMrIF4Ss7M0o
 
+###
+GET http://localhost:5000/users/679c7527e56fc6c6bcd48aa6
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3OWM3NTI3ZTU2ZmM2YzZiY2Q0OGFhNiIsInJvbGUiOiJ1c2VyIiwiZW1haWwiOiJtYXJ5bGVuZS5uZGFuYUBnbWlhbC5jb20iLCJpYXQiOjE3MzkyODM0NjAsIm5iZiI6MTczOTI4MzQ2MCwiZXhwIjoxNzM5Mjg3MDYwfQ.sS2DB8jZ5nNUYejCZE_Fv4CPw7UmtjnGQ3U76uA3Szw
+
+###
+GET http://localhost:5000/users/679c756be56fc6c6bcd48aa8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3OWM3NTZiZTU2ZmM2YzZiY2Q0OGFhOCIsInJvbGUiOiJ1c2VyIiwiZW1haWwiOiJtYXJ5bGVuZS5kYW5hQGdtaWFsLmNvbSIsImlhdCI6MTczOTI4MzcwNSwibmJmIjoxNzM5MjgzNzA1LCJleHAiOjE3MzkyODczMDV9.XrpMp9gqKCz0PGmpitpVz7n2bNH2v5P3m-xlnRldGM8
 
 ###
 POST http://localhost:5000/users
@@ -83,6 +92,10 @@ Content-Type: application/json
     "password": "adminpass"
 }
 
+
+###
+GET http://localhost:5000/orders
+Content-Type: application/json
 
 
 ###

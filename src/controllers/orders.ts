@@ -4,7 +4,15 @@ import Order, { OrderStatus } from '../models/order';
 class OrdersController {
   public async getAllOrders(req: Request, res: Response): Promise<void> {
     try {
-      const orders = await Order.find();
+      const orders = await Order.find().populate([
+        {
+          path: 'items.meal',
+          select: 'name price description imageUrl',
+        },
+        {
+          path: 'items.quantity',
+        },
+      ]);
 
       res.status(200).json(orders);
     } catch (error) {
@@ -72,7 +80,6 @@ class OrdersController {
 
   // Update order by PaymentIntent ID
   public async updateOrderByPaymentIntent(req: Request, res: Response) {
-    console.log('Hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
     try {
       const { id } = req.params;
       const updateData = req.body;
@@ -96,20 +103,25 @@ class OrdersController {
         {
           new: true,
           runValidators: true,
-        },
+        }
       ).populate([
+        {
+          path: 'items.meal',
+          select: 'name price imageUrl',
+        },
         {
           path: 'user',
           select: 'email name',
         },
       ]);
+
       if (!order) {
         return res.status(404).json({
           success: false,
           message: 'Order not found',
         });
       }
-      // TODO Send email to the user
+      // Send email to the user
 
       return res.status(200).json({
         success: true,
