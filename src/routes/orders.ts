@@ -1,32 +1,41 @@
-import { Router } from "express";
-import OrdersController from "../controllers/orders";
-import { authenticateToken, authorizeAdmin } from "../authmiddleware";
+import { Router } from 'express';
+import OrdersController from '../controllers/orders';
+import { authenticateToken, authorizeAdmin } from '../middleware/authmiddleware';
+import validatePaymentIntentId from '../middleware/validatePaymentIntentId';
+import validateApiKey from '../middleware/apikeymiddleware';
 
 const router = Router();
 
-router.post("/order", OrdersController.createOrder);
+router.post('/orders', OrdersController.createOrder);
 
-router.get("/orders/:id", authenticateToken, OrdersController.getOrderById);
+router.get('/orders/:id', authenticateToken, OrdersController.getOrderById);
 
 router.get(
-  "/orders",
+  '/orders',
   authenticateToken,
   authorizeAdmin,
-  OrdersController.getAllOrders
+  OrdersController.getAllOrders,
 );
 
 router.put(
-  "/orders/:id",
+  '/orders/:id',
   authenticateToken,
   authorizeAdmin,
-  OrdersController.updateOrder
+  OrdersController.updateOrder,
 );
 
 router.delete(
-  "/orders/:id",
+  '/orders/:id',
   authenticateToken,
   authorizeAdmin,
-  OrdersController.deleteOrder
+  OrdersController.deleteOrder,
+);
+
+router.put(
+  '/orders/payment-intent/:id',
+  validateApiKey,
+  validatePaymentIntentId,
+  OrdersController.updateOrderByPaymentIntent,
 );
 
 export default router;

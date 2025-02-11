@@ -1,16 +1,16 @@
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { Document, Schema } from 'mongoose';
 
 export interface IOrderItem {
-  _id: mongoose.Types.ObjectId; 
+  _id: mongoose.Types.ObjectId;
   quantity: number;
 }
 
 enum OrderStatus {
-  PENDING = "PENDING",
-  PAID = "PAID",
-  FAILED = "FAILED",
-  REFUNDED = "REFUNDED",
-  CANCELLED = "CANCELLED",
+  PENDING = 'PENDING',
+  PAID = 'PAID',
+  FAILED = 'FAILED',
+  REFUNDED = 'REFUNDED',
+  CANCELLED = 'CANCELLED',
 }
 
 export interface IOrder extends Document {
@@ -18,7 +18,7 @@ export interface IOrder extends Document {
   stripePaymentIntentId: string;
   amount: number;
   status: OrderStatus;
-  userId: mongoose.Types.ObjectId;
+  user: mongoose.Types.ObjectId;
   items: IOrderItem[];
 }
 
@@ -41,7 +41,7 @@ const OrderSchema: Schema = new Schema(
       enum: Object.values(OrderStatus),
       default: OrderStatus.PENDING,
     },
-    userId: {
+    user: {
       type: mongoose.Types.ObjectId,
       required: true,
       ref: 'User',
@@ -56,11 +56,11 @@ const OrderSchema: Schema = new Schema(
       required: true,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 // Create the model
-const Order = mongoose.model<IOrder>("Order", OrderSchema);
+const Order = mongoose.model<IOrder>('Order', OrderSchema);
 
-export { OrderStatus }; 
+export { OrderStatus };
 export default Order;

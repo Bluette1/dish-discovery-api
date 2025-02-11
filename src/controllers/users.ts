@@ -106,7 +106,7 @@ class UsersController {
     try {
       const { id } = req.params;
       const {
-        name, email, password, role, cart
+        name, email, password, role, cart,
       } = req.body;
       const currentUserRole = req.user?.role;
 
