@@ -1,5 +1,22 @@
 import { Request, Response } from 'express';
+import { IMeal } from '../models/meal';
 import Order, { OrderStatus } from '../models/order';
+import { IUser } from '../models/user';
+import { sendEmail } from '../utils/email';
+
+export interface OrderItem {
+  meal: IMeal;
+  quantity: number;
+}
+
+export interface IOrder extends Document {
+  orderNumber: string;
+  stripePaymentIntentId: string;
+  amount: number;
+  status: OrderStatus;
+  user: IUser;
+  items: OrderItem[];
+}
 
 class OrdersController {
   public async getAllOrders(req: Request, res: Response): Promise<void> {
@@ -91,7 +108,7 @@ class OrdersController {
         });
       }
 
-      const order = await Order.findOneAndUpdate(
+      const order = (await Order.findOneAndUpdate(
         { stripePaymentIntentId: id },
         {
           $set: {
@@ -113,15 +130,97 @@ class OrdersController {
           path: 'user',
           select: 'email name',
         },
-      ]);
-
+      ])) as unknown as IOrder;
       if (!order) {
         return res.status(404).json({
           success: false,
           message: 'Order not found',
         });
       }
+
       // Send email to the user
+      const email = order.user.email;
+      const nameToDisplay = order.user.name || order.user.email; // Use name or email if name is not available
+      const greeting = `Hi ${nameToDisplay}, thank you for your order at DishCovery!`;
+
+      // Construct order items HTML
+      const orderItemsHtml = order.items
+        .map(
+          (item: OrderItem) => `
+    <div class="order-item">
+        <div class="item-name col">${item.meal.name}</div>
+        <div class="item-quantity col">Quantity: ${item.quantity}</div>
+        <div class="item-price col">$${(
+          item.quantity * item.meal.price
+        ).toFixed(2)}</div>
+    </div>
+`
+        )
+        .join('');
+
+      const total = order.items
+        .reduce((sum, item) => sum + item.quantity * item.meal.price, 0)
+        .toFixed(2);
+
+      const html = `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Order Items Display</title>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f4f4f4; }
+            .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); }
+            h1 { text-align: center; color: #fff; background-color: #007BFF; padding: 10px; border-radius: 5px; }
+            .order-item { display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #ddd; }
+            .order-item:last-child { border-bottom: none; }
+            .item-name { font-weight: bold; color: #333; }
+            .item-quantity, .item-price { color: #666; }
+            .total { font-weight: bold; font-size: 1.2em; margin-top: 20px; text-align: right; color: #007BFF; }
+            .greeting { margin-bottom: 20px; font-size: 1.1em; color: #333; }
+            .track-order { display: block; margin-top: 20px; text-align: center; color: #fff; background-color: #28a745; padding: 10px; border-radius: 5px; text-decoration: none; }
+            .track-order:hover { background-color: #218838; }
+            .col { padding-right: 2.5em; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Order Items</h1>
+            <div class="greeting">${greeting}</div>
+            <div id="order-items">${orderItemsHtml}</div>
+            <div class="total">Total: $${total}</div>
+            <a href="${process.env.FRONTEND_URL}/track-order" class="track-order">Track Your Order</a>
+        </div>
+    </body>
+    </html>
+`;
+
+      // Create a plain text version of the email
+      const text = `
+${greeting}
+
+Order Items:
+${order.items
+  .map(
+    (item: OrderItem) =>
+      `${item.meal.name} - Quantity: ${item.quantity} - Price: $${(
+        item.quantity * item.meal.price
+      ).toFixed(2)}`
+  )
+  .join('\n')}
+
+Total: $${total}
+
+Track your order here: ${process.env.FRONTEND_URL}/track-order
+`;
+
+      await sendEmail({
+        to: email,
+        subject: 'DishCovery Confirmation of Order',
+        html,
+        text,
+      });
 
       return res.status(200).json({
         success: true,

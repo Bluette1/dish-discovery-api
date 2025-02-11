@@ -2,16 +2,7 @@ import { Request, Response } from 'express';
 import { normalizeEmail } from 'validator';
 import User, { IUser } from '../models/user';
 
-const nodemailer = require('nodemailer');
-
-// Configure email transporter
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: `${process.env.EMAIL_USER}`,
-    pass: `${process.env.EMAIL_PASSWORD}`,
-  },
-});
+import { sendEmail } from '../utils/email';
 
 class UsersController {
   // Get all users
@@ -57,10 +48,12 @@ class UsersController {
         res.status(403).json({
           message: 'Only admins can create users with the admin role',
         });
-        return; // Ensure no further code executes
+        return;
       }
 
       const savedUser = await newUser.save();
+
+      const nameToDisplay = savedUser.name || savedUser.email;
 
       // Send confirmation email
       const mailOptions = {
@@ -68,13 +61,20 @@ class UsersController {
         to: savedUser.email,
         subject: 'Welcome to Dish Discovery! Registration Successful',
         html: `
-        <h1>Welcome!</h1>
+        <h1>Welcome ${nameToDisplay}!</h1>
         <p>Thank you for registering with our service.</p>
         <p>Your account has been successfully created.</p>
       `,
+        text: `
+      Welcome ${nameToDisplay}!
+
+      Thank you for registering with our service.
+      
+      Your account has been successfully created.
+      `,
       };
 
-      await transporter.sendMail(mailOptions);
+      await sendEmail(mailOptions);
 
       res.status(201).json({
         id: savedUser._id,

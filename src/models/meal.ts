@@ -1,6 +1,6 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
-interface IMeal extends Document {
+export interface IMeal extends Document {
   name: string;
   description: string;
   recipe: string;
