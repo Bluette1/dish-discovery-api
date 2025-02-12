@@ -11,7 +11,6 @@ dotenv.config();
 const secretKey = process.env.JWT_SECRET_KEY || 'YourSecretKey';
 
 class LoginController {
-  // User login
   public async login(req: Request, res: Response): Promise<void> {
     try {
       const { email, password } = req.body;

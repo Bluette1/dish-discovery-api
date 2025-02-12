@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 import { OAuth2Client } from 'google-auth-library';
 import dotenv from 'dotenv';
 import normalizeEmail from 'normalize-email';
-import User from './models/user';
+import User from '../models/user';
 
 dotenv.config();
 

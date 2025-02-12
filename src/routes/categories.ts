@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import CategoriesController from '../controllers/categories';
-import { authenticateToken, authorizeAdmin } from '../authmiddleware';
+import { authenticateToken, authorizeAdmin } from '../middleware/authmiddleware';
 
 const router = Router();
 
