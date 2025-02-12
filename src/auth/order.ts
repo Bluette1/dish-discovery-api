@@ -1,12 +1,10 @@
 const canViewOrder = (
   user: UserPayload | undefined,
-  order: { user: { _id: { toString: () => any } } }
-) => {
-  return (
-    user &&
-    (user.role === 'admin' || user.id.toString() === order.user._id.toString())
-  );
-};
+  order: { user: { _id: { toString: () => any } } },
+) => (
+  user
+    && (user.role === 'admin' || user.id.toString() === order.user._id.toString())
+);
 
 const scopedOrders = (user: UserPayload | undefined, orders: any[]) => {
   if (user && user.role === 'admin') {
@@ -14,8 +12,7 @@ const scopedOrders = (user: UserPayload | undefined, orders: any[]) => {
   }
 
   return orders.filter(
-    (order: { user: { _id: { toString: () => any } } }) =>
-      user && order.user._id.toString() === user.id.toString()
+    (order: { user: { _id: { toString: () => any } } }) => user && order.user._id.toString() === user.id.toString(),
   );
 };
 

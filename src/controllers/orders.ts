@@ -125,7 +125,7 @@ class OrdersController {
         {
           new: true,
           runValidators: true,
-        }
+        },
       ).populate([
         {
           path: 'items.meal',
@@ -144,7 +144,7 @@ class OrdersController {
       }
 
       // Send email to the user
-      const email = order.user.email;
+      const { email } = order.user;
       const nameToDisplay = order.user.name || order.user.email; // Use name or email if name is not available
       const greeting = `Hi ${nameToDisplay}, thank you for your order at DishCovery!`;
 
@@ -156,10 +156,10 @@ class OrdersController {
         <div class="item-name col">${item.meal.name}</div>
         <div class="item-quantity col">Quantity: ${item.quantity}</div>
         <div class="item-price col">$${(
-          item.quantity * item.meal.price
-        ).toFixed(2)}</div>
+    item.quantity * item.meal.price
+  ).toFixed(2)}</div>
     </div>
-`
+`,
         )
         .join('');
 
@@ -207,13 +207,12 @@ ${greeting}
 
 Order Items:
 ${order.items
-  .map(
-    (item: OrderItem) =>
-      `${item.meal.name} - Quantity: ${item.quantity} - Price: $${(
+    .map(
+      (item: OrderItem) => `${item.meal.name} - Quantity: ${item.quantity} - Price: $${(
         item.quantity * item.meal.price
-      ).toFixed(2)}`
-  )
-  .join('\n')}
+      ).toFixed(2)}`,
+    )
+    .join('\n')}
 
 Total: $${total}
 

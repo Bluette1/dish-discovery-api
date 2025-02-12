@@ -32,7 +32,9 @@ class UsersController {
 
   // Create a new user
   public async createUser(req: Request, res: Response): Promise<void> {
-    const { name, email, password, role } = req.body;
+    const {
+      name, email, password, role,
+    } = req.body;
 
     try {
       const newUser = new User({
@@ -103,7 +105,9 @@ class UsersController {
   public async updateUser(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;
-      const { name, email, password, role, cart } = req.body;
+      const {
+        name, email, password, role, cart,
+      } = req.body;
       const currentUserRole = req.user?.role;
 
       // Prevent normal users from changing roles
