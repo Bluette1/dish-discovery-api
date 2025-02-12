@@ -3,6 +3,7 @@ import { IMeal } from '../models/meal';
 import Order, { OrderStatus } from '../models/order';
 import { IUser } from '../models/user';
 import { sendEmail } from '../utils/email';
+import { canViewOrder, scopedOrders } from '../auth/order';
 
 export interface OrderItem {
   meal: IMeal;
@@ -31,7 +32,7 @@ class OrdersController {
         },
       ]);
 
-      res.status(200).json(orders);
+      res.status(200).json(scopedOrders(req.user, orders));
     } catch (error) {
       res.status(500).json({ message: 'Server error' });
     }
@@ -41,8 +42,12 @@ class OrdersController {
   public async getOrderById(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;
-      const order = await Order.findById(id);
+      const order = await Order.findById(id).populate(['items.meal']);
       if (order) {
+        if (!canViewOrder(req.user, order)) {
+          res.status(401).json({ message: 'Not allowed' });
+          return;
+        }
         res.status(200).json(order);
       } else {
         res.status(404).json({ message: 'Order not found' });

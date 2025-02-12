@@ -12,8 +12,7 @@ router.get('/orders/:id', authenticateToken, OrdersController.getOrderById);
 
 router.get(
   '/orders',
-  // authenticateToken,
-  // authorizeAdmin,
+  authenticateToken,
   OrdersController.getAllOrders,
 );
 
