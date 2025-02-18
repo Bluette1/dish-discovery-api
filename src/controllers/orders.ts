@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
+import normalizeEmail from 'normalize-email';
 import { IMeal } from '../models/meal';
 import Order, { OrderStatus } from '../models/order';
 import { IUser } from '../models/user';
 import { sendEmail } from '../utils/email';
 import { canViewOrder, scopedOrders } from '../auth/order';
-import normalizeEmail from 'normalize-email';
 
 export interface OrderItem {
   meal: IMeal;
@@ -26,9 +26,9 @@ class OrdersController {
       const { email, orderNumber } = req.query;
       let orders;
 
-      if (email && typeof email == 'string' && orderNumber) {
+      if (email && typeof email === 'string' && orderNumber) {
         orders = (await Order.find({ orderNumber }).populate(
-          'user'
+          'user',
         )) as unknown as [IOrder];
         const order = orders[0];
         if (normalizeEmail(email) !== order.user.email) {
@@ -141,7 +141,7 @@ class OrdersController {
         {
           new: true,
           runValidators: true,
-        }
+        },
       ).populate([
         {
           path: 'items.meal',
@@ -172,10 +172,10 @@ class OrdersController {
         <div class="item-name col">${item.meal.name}</div>
         <div class="item-quantity col">Quantity: ${item.quantity}</div>
         <div class="item-price col">$${(
-          item.quantity * item.meal.price
-        ).toFixed(2)}</div>
+    item.quantity * item.meal.price
+  ).toFixed(2)}</div>
     </div>
-`
+`,
         )
         .join('');
 
@@ -223,13 +223,12 @@ ${greeting}
 
 Order Items:
 ${order.items
-  .map(
-    (item: OrderItem) =>
-      `${item.meal.name} - Quantity: ${item.quantity} - Price: $${(
+    .map(
+      (item: OrderItem) => `${item.meal.name} - Quantity: ${item.quantity} - Price: $${(
         item.quantity * item.meal.price
-      ).toFixed(2)}`
-  )
-  .join('\n')}
+      ).toFixed(2)}`,
+    )
+    .join('\n')}
 
 Total: $${total}
 

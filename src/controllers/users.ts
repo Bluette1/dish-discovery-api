@@ -19,7 +19,9 @@ class UsersController {
   public async getUserById(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;
-      const user = await User.findById(id).populate('cart.meal');
+      const user = await User.findById(id)
+        .populate('cart.meal')
+        .populate('wishList');
       if (user) {
         res.status(200).json(user);
       } else {
