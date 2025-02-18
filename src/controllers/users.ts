@@ -19,7 +19,9 @@ class UsersController {
   public async getUserById(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;
-      const user = await User.findById(id).populate('cart.meal');
+      const user = await User.findById(id)
+        .populate('cart.meal')
+        .populate('wishList');
       if (user) {
         res.status(200).json(user);
       } else {
@@ -106,7 +108,7 @@ class UsersController {
     try {
       const { id } = req.params;
       const {
-        name, email, password, role, cart,
+        name, email, password, role, cart, wishList,
       } = req.body;
       const currentUserRole = req.user?.role;
 
@@ -123,6 +125,7 @@ class UsersController {
       if (password) updateFields.password = password;
       if (role) updateFields.role = role;
       if (cart) updateFields.cart = cart;
+      if (wishList) updateFields.wishList = wishList;
 
       const updatedUser = await User.findByIdAndUpdate(id, updateFields, {
         new: true,

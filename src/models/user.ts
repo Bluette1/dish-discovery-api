@@ -17,6 +17,7 @@ export interface IUser extends Document {
   resetToken?: string;
   resetTokenExpiry?: number;
   cart: ICartItem[];
+  wishList: Schema.Types.ObjectId[];
   comparePassword(password: string): Promise<boolean>;
 }
 
@@ -53,6 +54,10 @@ const UserSchema: Schema = new Schema({
         quantity: { type: Number, required: true, min: 1 },
       },
     ],
+    default: [],
+  },
+  wishList: {
+    type: [{ type: Schema.Types.ObjectId, required: true, ref: 'Meal' }],
     default: [],
   },
 });

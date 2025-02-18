@@ -32,6 +32,9 @@ Content-Type: application/json
     "password": "GodIsGood123&"
 }
 
+###
+
+GET http://localhost:5000/track/orders?orderNumber=E5GX16BU2&email=marylene.sawyer@gmail.com
 
 
 ###

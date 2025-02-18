@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import normalizeEmail from 'normalize-email';
 import { IMeal } from '../models/meal';
 import Order, { OrderStatus } from '../models/order';
 import { IUser } from '../models/user';
@@ -22,17 +23,32 @@ export interface IOrder extends Document {
 class OrdersController {
   public async getAllOrders(req: Request, res: Response): Promise<void> {
     try {
-      const orders = await Order.find().populate([
-        {
-          path: 'items.meal',
-          select: 'name price description imageUrl',
-        },
-        {
-          path: 'items.quantity',
-        },
-      ]);
+      const { email, orderNumber } = req.query;
+      let orders;
 
-      res.status(200).json(scopedOrders(req.user, orders));
+      if (email && typeof email === 'string' && orderNumber) {
+        orders = (await Order.find({ orderNumber }).populate(
+          'user',
+        )) as unknown as [IOrder];
+        const order = orders[0];
+        if (normalizeEmail(email) !== order.user.email) {
+          res.status(401).json({ message: 'Not allowed' });
+          return;
+        }
+        res.status(200).json(order);
+      } else {
+        orders = await Order.find().populate([
+          {
+            path: 'items.meal',
+            select: 'name price description imageUrl',
+          },
+          {
+            path: 'items.quantity',
+          },
+        ]);
+
+        res.status(200).json(scopedOrders(req.user, orders));
+      }
     } catch (error) {
       res.status(500).json({ message: 'Server error' });
     }
