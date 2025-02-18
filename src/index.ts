@@ -6,6 +6,7 @@ import bodyParser from 'body-parser';
 import categories from './routes/categories';
 import meals from './routes/meals';
 import orders from './routes/orders';
+import trackOrders from './routes/track/orders';
 import auth from './routes/auth';
 import users from './routes/users';
 import { logger } from './logger';
@@ -48,6 +49,7 @@ app.use('/', meals);
 app.use('/', orders);
 app.use('/', auth);
 app.use('/', users);
+app.use('/', trackOrders);
 
 // Middleware to handle 404 errors
 app.use((req: Request, res: Response, next: NextFunction) => {

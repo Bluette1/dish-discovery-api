@@ -4,6 +4,7 @@ import Order, { OrderStatus } from '../models/order';
 import { IUser } from '../models/user';
 import { sendEmail } from '../utils/email';
 import { canViewOrder, scopedOrders } from '../auth/order';
+import normalizeEmail from 'normalize-email';
 
 export interface OrderItem {
   meal: IMeal;
@@ -22,17 +23,32 @@ export interface IOrder extends Document {
 class OrdersController {
   public async getAllOrders(req: Request, res: Response): Promise<void> {
     try {
-      const orders = await Order.find().populate([
-        {
-          path: 'items.meal',
-          select: 'name price description imageUrl',
-        },
-        {
-          path: 'items.quantity',
-        },
-      ]);
+      const { email, orderNumber } = req.query;
+      let orders;
 
-      res.status(200).json(scopedOrders(req.user, orders));
+      if (email && typeof email == 'string' && orderNumber) {
+        orders = (await Order.find({ orderNumber }).populate(
+          'user'
+        )) as unknown as [IOrder];
+        const order = orders[0];
+        if (normalizeEmail(email) !== order.user.email) {
+          res.status(401).json({ message: 'Not allowed' });
+          return;
+        }
+        res.status(200).json(order);
+      } else {
+        orders = await Order.find().populate([
+          {
+            path: 'items.meal',
+            select: 'name price description imageUrl',
+          },
+          {
+            path: 'items.quantity',
+          },
+        ]);
+
+        res.status(200).json(scopedOrders(req.user, orders));
+      }
     } catch (error) {
       res.status(500).json({ message: 'Server error' });
     }
@@ -125,7 +141,7 @@ class OrdersController {
         {
           new: true,
           runValidators: true,
-        },
+        }
       ).populate([
         {
           path: 'items.meal',
@@ -156,10 +172,10 @@ class OrdersController {
         <div class="item-name col">${item.meal.name}</div>
         <div class="item-quantity col">Quantity: ${item.quantity}</div>
         <div class="item-price col">$${(
-    item.quantity * item.meal.price
-  ).toFixed(2)}</div>
+          item.quantity * item.meal.price
+        ).toFixed(2)}</div>
     </div>
-`,
+`
         )
         .join('');
 
@@ -207,12 +223,13 @@ ${greeting}
 
 Order Items:
 ${order.items
-    .map(
-      (item: OrderItem) => `${item.meal.name} - Quantity: ${item.quantity} - Price: $${(
+  .map(
+    (item: OrderItem) =>
+      `${item.meal.name} - Quantity: ${item.quantity} - Price: $${(
         item.quantity * item.meal.price
-      ).toFixed(2)}`,
-    )
-    .join('\n')}
+      ).toFixed(2)}`
+  )
+  .join('\n')}
 
 Total: $${total}
 
