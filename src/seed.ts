@@ -39,77 +39,77 @@ const seedDatabase = async () => {
         name: 'Starter',
         description: 'Small dishes served before the main course.',
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/starter.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/starter.jpg',
       },
       {
         name: 'Breakfast',
         description: 'Hearty morning dishes that help you start your day.',
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/breakfast.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/breakfast.jpg',
       },
       {
         name: 'Dessert',
         description: 'Sweet dishes served at the end of a meal.',
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/dessert.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/dessert.jpg',
       },
       {
         name: 'Miscellaneous',
         description:
           'Miscellaneous meals such as soups and bread served alongside the meal.',
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/miscellaneous.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/miscellaneous.jpg',
       },
       {
         name: 'Pasta',
         description: 'Traditional Italian staple food',
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/pasta.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/pasta.jpg',
       },
       {
         name: 'Vegetarian',
         description:
           'Delicious dishes for those who eat neither meat nor seafood.',
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/vegetarian.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/vegetarian.jpg',
       },
       {
         name: 'Vegan',
         description:
           'Delicious dishes for those who do not eat animal products, including diary and eggs.',
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/vegan.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/vegan.jpg',
       },
       {
         name: 'Seafood',
         description:
           'Any form of sea life eaten by humans such as fish and other forms of sea food.',
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/seafood.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/seafood.jpg',
       },
       {
         name: 'Chicken',
         description: 'Mouth-watering chicken meals.',
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/chicken.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/chicken.jpg',
       },
       {
         name: 'Beef',
         description: 'Meat from cattle meals.',
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/beef.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/beef.jpg',
       },
       {
         name: 'Lamb',
         description: 'Meat from domestic sheep.',
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/lamb.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/lamb.jpg',
       },
       {
         name: 'Salad',
         description: 'Salads and the like.',
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/salad.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/salad.jpg',
       },
     ];
 
@@ -132,7 +132,7 @@ const seedDatabase = async () => {
         region: 'Global',
         price: 15,
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/garlic-butter-shrimp.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/garlic-butter-shrimp.jpg',
       },
       {
         name: 'Bruschetta',
@@ -143,7 +143,7 @@ const seedDatabase = async () => {
         region: 'Italian',
         price: 12,
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/bruschetta.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/bruschetta.jpg',
       },
       {
         name: 'Stuffed Mushrooms',
@@ -154,7 +154,7 @@ const seedDatabase = async () => {
         region: 'Global',
         price: 15,
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/stuffed-mushrooms.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/stuffed-mushrooms.jpg',
       },
 
       // Breakfast
@@ -167,7 +167,7 @@ const seedDatabase = async () => {
         region: 'Global',
         price: 20,
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/pancakes.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/pancakes.jpg',
       },
       {
         name: 'Omelette',
@@ -178,7 +178,7 @@ const seedDatabase = async () => {
         region: 'Global',
         price: 22,
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/omelette.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/omelette.jpg',
       },
       {
         name: 'Avocado Toast',
@@ -189,7 +189,7 @@ const seedDatabase = async () => {
         region: 'Global',
         price: 12,
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/avocado-toast.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/avocado-toast.jpg',
       },
 
       // Dessert
@@ -203,7 +203,7 @@ const seedDatabase = async () => {
         price: 70,
         serves: 8,
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/chocolate-cake.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/chocolate-cake.jpg',
       },
       {
         name: 'Apple Pie',
@@ -215,7 +215,7 @@ const seedDatabase = async () => {
         price: 25,
         serves: 3,
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/apple-pie.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/apple-pie.jpg',
       },
       {
         name: 'Tiramisu',
@@ -227,7 +227,7 @@ const seedDatabase = async () => {
         price: 32,
         serves: 3,
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/tiramisu.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/tiramisu.jpg',
       },
 
       // Miscellaneous
@@ -240,7 +240,7 @@ const seedDatabase = async () => {
         region: 'Italian',
         price: 20,
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/minestrone-soup.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/minestrone-soup.jpg',
       },
       {
         name: 'Fried Rice',
@@ -251,7 +251,7 @@ const seedDatabase = async () => {
         region: 'Asian',
         price: 26,
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/fried-rice.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/fried-rice.jpg',
       },
       {
         name: 'Potato Salad',
@@ -262,7 +262,7 @@ const seedDatabase = async () => {
         region: 'American',
         price: 17,
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/potato-salad.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/potato-salad.jpg',
       },
 
       // Vegetarian
@@ -275,7 +275,7 @@ const seedDatabase = async () => {
         region: 'Asian',
         price: 24,
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/vegetable-stir-fry.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/vegetable-stir-fry.jpg',
       },
       {
         name: 'Stuffed Peppers',
@@ -286,7 +286,7 @@ const seedDatabase = async () => {
         region: 'Global',
         price: 22,
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/stuffed-peppers.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/stuffed-peppers.jpg',
       },
       {
         name: 'Caprese Salad',
@@ -297,7 +297,7 @@ const seedDatabase = async () => {
         region: 'Italian',
         price: 23,
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/caprese-salad.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/caprese-salad.jpg',
       },
 
       // Vegan
@@ -310,7 +310,7 @@ const seedDatabase = async () => {
         region: 'Global',
         price: 25,
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/vegan-chili.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/vegan-chili.jpg',
       },
       {
         name: 'Quinoa Salad',
@@ -321,7 +321,7 @@ const seedDatabase = async () => {
         region: 'Global',
         price: 17,
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/quinoa-salad.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/quinoa-salad.jpg',
       },
       {
         name: 'Lentil Soup',
@@ -332,7 +332,7 @@ const seedDatabase = async () => {
         region: 'Global',
         price: 13,
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/lentil-soup.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/lentil-soup.jpg',
       },
 
       // Seafood
@@ -345,7 +345,7 @@ const seedDatabase = async () => {
         region: 'Global',
         price: 27,
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/grilled-salmon.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/grilled-salmon.jpg',
       },
       {
         name: 'Shrimp Scampi',
@@ -356,7 +356,7 @@ const seedDatabase = async () => {
         ingredients: ['Shrimp', 'Garlic', 'Butter', 'Pasta'],
         region: 'Italian',
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/shrimp-scampi.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/shrimp-scampi.jpg',
       },
       {
         name: 'Fish Tacos',
@@ -367,7 +367,7 @@ const seedDatabase = async () => {
         region: 'Mexican',
         price: 30,
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/fish-tacos.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/fish-tacos.jpg',
       },
 
       // Chicken
@@ -380,7 +380,7 @@ const seedDatabase = async () => {
         region: 'Indian',
         price: 15,
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/tandoori-chicken.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/tandoori-chicken.jpg',
       },
       {
         name: 'Chicken Alfredo',
@@ -391,7 +391,7 @@ const seedDatabase = async () => {
         region: 'Italian',
         price: 15,
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/chicken-alfredo.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/chicken-alfredo.jpg',
       },
       {
         name: 'Buffalo Chicken Wings',
@@ -402,7 +402,7 @@ const seedDatabase = async () => {
         region: 'American',
         price: 13,
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/buffalo-wings.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/buffalo-wings.jpg',
       },
 
       // Beef
@@ -415,7 +415,7 @@ const seedDatabase = async () => {
         region: 'Russian',
         price: 25,
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/beef-stroganoff.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/beef-stroganoff.jpg',
       },
       {
         name: 'Beef Tacos',
@@ -426,7 +426,7 @@ const seedDatabase = async () => {
         ingredients: ['Ground Beef', 'Tortillas', 'Lettuce', 'Cheese'],
         region: 'Mexican',
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/beef-tacos.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/beef-tacos.jpg',
       },
       {
         name: 'Beef Bourguignon',
@@ -437,7 +437,7 @@ const seedDatabase = async () => {
         region: 'French',
         price: 26,
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/beef-bourguignon.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/beef-bourguignon.jpg',
       },
 
       // Lamb
@@ -450,7 +450,7 @@ const seedDatabase = async () => {
         region: 'Global',
         price: 28,
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/lamb-chops.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/lamb-chops.jpg',
       },
       {
         name: 'Lamb Curry',
@@ -461,7 +461,7 @@ const seedDatabase = async () => {
         region: 'Indian',
         price: 30,
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/lamb-curry.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/lamb-curry.jpg',
       },
       {
         name: 'Greek Lamb Gyros',
@@ -472,7 +472,7 @@ const seedDatabase = async () => {
         region: 'Greek',
         price: 32,
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/lamb-gyros.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/lamb-gyros.jpg',
       },
 
       // Salad
@@ -485,7 +485,7 @@ const seedDatabase = async () => {
         region: 'Italian',
         price: 22,
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/caesar-salad.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/caesar-salad.jpg',
       },
       {
         name: 'Greek Salad',
@@ -496,7 +496,7 @@ const seedDatabase = async () => {
         ingredients: ['Tomatoes', 'Cucumbers', 'Feta Cheese', 'Olives'],
         region: 'Greek',
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/greek-salad.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/greek-salad.jpg',
       },
       {
         name: 'Caprese Salad',
@@ -507,7 +507,7 @@ const seedDatabase = async () => {
         region: 'Italian',
         price: 20,
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/caprese-salad.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/caprese-salad.jpg',
       },
       // Pasta
       {
@@ -519,7 +519,7 @@ const seedDatabase = async () => {
         region: 'Italian',
         price: 30,
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/carbonara.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/carbonara.jpg',
       },
       {
         name: 'Penne Arrabbiata',
@@ -530,7 +530,7 @@ const seedDatabase = async () => {
         region: 'Italian',
         price: 32,
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/penne-arrabbiata.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/penne-arrabbiata.jpg',
       },
       {
         name: 'Fettuccine Alfredo',
@@ -541,7 +541,7 @@ const seedDatabase = async () => {
         region: 'Italian',
         price: 29,
         imageUrl:
-          'https://dishdishcovery.s3.us-east-1.amazonaws.com/images/meals/fettuccine-alfredo.jpg',
+          'https://topweaver-hub.s3.us-east-2.amazonaws.com/images/fettuccine-alfredo.jpg',
       },
     ];
 
